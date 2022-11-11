@@ -16,6 +16,10 @@ import com.travel.model.Customer;
 import com.travel.utility.DButil;
 
 public class CustomerDAO_impl implements CustomerDAO {
+	
+	
+	          /**** Create_Customer_Account ****/
+	         
 
 	@Override
 	public boolean create_customerAccount(Customer c) throws Customer_Exception {
@@ -26,7 +30,7 @@ public class CustomerDAO_impl implements CustomerDAO {
 		try(Connection conn = DButil.getConnection()){
 			
 			
-		PreparedStatement ps =	conn.prepareStatement("insert into customer values(?,?,?,?)");
+		PreparedStatement ps =	conn.prepareStatement("insert into customer (Cusutomername ,customeraddress , customermobile , customerpassword ) values(?,?,?,?)");
 		
 		ps.setString(1, c.getCnmae());
 		ps.setString(2, c.getAddress());
@@ -60,6 +64,10 @@ public class CustomerDAO_impl implements CustomerDAO {
 		
 		return flag;
 	}
+	
+	
+             	/*** Customer_Login ***/
+	
 
 	@Override
 	public boolean customer_login(String username, String password) throws Customer_Exception {
@@ -70,7 +78,7 @@ public class CustomerDAO_impl implements CustomerDAO {
 		
 		try(Connection conn = DButil.getConnection()){
 			
-		PreparedStatement ps = conn.prepareStatement("select * from customers where customerName = ? AND customerpassword = ?");
+		PreparedStatement ps = conn.prepareStatement("select * from customer where cusutomerName = ? AND customerpassword = ?");
 		
 		   ps.setString(1, username);
 		   ps.setString(2, password);
@@ -102,6 +110,10 @@ public class CustomerDAO_impl implements CustomerDAO {
 		return flag;
 		
 	}
+	
+	
+	         /*** Get_Bus_Details ****/
+	
 
 	@Override
 	public List<Bus_Details> getbusdetails(String from, String to) throws Customer_Exception {
@@ -112,10 +124,30 @@ public class CustomerDAO_impl implements CustomerDAO {
 		
 		try(Connection conn = DButil.getConnection()){
 			
-		PreparedStatement ps =	conn.prepareStatement("select * from bus_details where BusFrom = ? AND BusTo = to");
+		PreparedStatement ps =	conn.prepareStatement("select * from bus_details where BusFrom = ? AND BusTo = ?");
 			
 		ps.setString(1, from);
 		ps.setString(2, to);
+			
+			ResultSet rs = ps.executeQuery();
+		
+				
+				 while(rs.next()) {
+			    	 
+			    	 String busname = rs.getString("busname");
+			    	 int busid = rs.getInt("busid");
+			    	 String busfrom = rs.getString("busfrom");
+			    	 String busto = rs.getString("busto");
+			    	 String depart = rs.getString("busDeparture");
+			    	 int seat = rs.getInt("bustotalSeat");
+			    	 int total = rs.getInt("busremainingseat");
+			    	 
+			    	 Bus_Details bus = new Bus_Details(busname, busid, busfrom, busto, depart, seat, total);
+			    	 
+			    	 list.add(bus);
+			     }
+				
+				if(list.isEmpty()) throw new Customer_Exception("no bus found");
 			
 			
 			

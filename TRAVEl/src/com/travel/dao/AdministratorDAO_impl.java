@@ -9,6 +9,7 @@ import java.util.List;
 
 import com.travel.exception.Administrator_Exception;
 import com.travel.exception.Customer_Exception;
+import com.travel.model.Booking;
 import com.travel.model.Bus_Details;
 import com.travel.model.Customer;
 import com.travel.utility.DButil;
@@ -99,7 +100,7 @@ public class AdministratorDAO_impl implements AdministratorDAO {
 	}
 
 	@Override
-	public Customer conform_booking_ticket(int cid) throws Administrator_Exception, Customer_Exception {
+	public Customer conform_booking_ticket(int TicketNo) throws Administrator_Exception, Customer_Exception {
 		
 		Customer cus = new Customer();
 		
@@ -108,29 +109,42 @@ public class AdministratorDAO_impl implements AdministratorDAO {
 		
 		try(Connection conn = DButil.getConnection()){
 			
-		PreparedStatement ps = conn.prepareStatement("update booking set conformation = ? where customerid = ?");
+		PreparedStatement ps = conn.prepareStatement("update booking set conformation = ? where Ticketno = ?");
 		
 		ps.setBoolean(1, true);
-		ps.setInt(2, cid);
+		ps.setInt(2, TicketNo);
 		
 		int x = ps.executeUpdate();
         
 		if(x > 0) {
+			int cusid = 0;
 			
-		PreparedStatement ps2 = conn.prepareStatement("select * from customer where customerid = ?");
-			ps.setInt(1, cid);
+			PreparedStatement ps3 = conn.prepareStatement("select * from booking where Ticketno = ?");
+			ps3.setInt(1, TicketNo);
 			
-			ResultSet rs = ps2.executeQuery();
+			ResultSet rs = ps3.executeQuery();
 			
 			if(rs.next()) {
-				
-				cus.setCnmae(rs.getString("Cusutomername"));
-				cus.setAddress(rs.getString("CustomerAddress"));
-				cus.setCmobile(rs.getString("customermobile"));
+				 cusid = rs.getInt("customerid");
 			}
-			else throw new Customer_Exception("Customer not found ... on this id "+cid);
+			
+			
+			
+			
+		PreparedStatement ps2 = conn.prepareStatement("select * from customer where customerid = ?");
+			ps2.setInt(1, cusid);
+			
+			ResultSet rs1 = ps2.executeQuery();
+			
+			if(rs1.next()) {
+				
+				cus.setCnmae(rs1.getString("Cusutomername"));
+				cus.setAddress(rs1.getString("CustomerAddress"));
+				cus.setCmobile(rs1.getString("customermobile"));
+			}
+			else throw new Customer_Exception("Customer not found ... on this id "+cusid);
 		}
-		else throw new Administrator_Exception("cid is not there for update");
+		else throw new Administrator_Exception("ticketno is not there for update");
 			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -138,10 +152,6 @@ public class AdministratorDAO_impl implements AdministratorDAO {
 			
 			throw new Administrator_Exception(e.getMessage());
 			
-		} catch (Customer_Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			throw new Customer_Exception(e.getMessage());
 		}
 		
 
@@ -189,6 +199,47 @@ public class AdministratorDAO_impl implements AdministratorDAO {
 		
 	}
 
+	@Override
+	public List<Booking> viewALLBooking() throws Customer_Exception {
+		
+		List<Booking> list = new ArrayList<>();
+		
+		
+		try(Connection conn = DButil.getConnection()){
+			
+		PreparedStatement ps = conn.prepareStatement("select * from booking");
+		
+			
+		ResultSet rs = ps.executeQuery();
+		
+		while(rs.next()) {
+			
+			int cusid = rs.getInt("customerid");
+			int busid = rs.getInt("Busid");
+			int ticket = rs.getInt("TicketNo");
+			String conformation = rs.getString("conformation");
+			
+			Booking ba = new Booking(cusid, busid, conformation, ticket);
+			list.add(ba);
+			
+		}
+		
+		if(list.isEmpty()) throw new Customer_Exception("no booking");
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			throw new Customer_Exception(e.getMessage());
+		}
+		
+		
+		
+		return list;
+		
+		
+	}
+	
+	
 	
 
 }

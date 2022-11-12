@@ -16,6 +16,10 @@ import com.travel.utility.DButil;
 
 public class AdministratorDAO_impl implements AdministratorDAO {
 
+	
+	              /**** Admin Login ***/
+	
+	
 	@Override
 	public boolean admin_login(String username, String password) throws Administrator_Exception {
 		
@@ -61,6 +65,12 @@ public class AdministratorDAO_impl implements AdministratorDAO {
 		
 	}
 
+	
+	
+	                 /**** Insert Bus Deatisl ****/
+	
+	
+	
 	@Override
 	public boolean create_bus_details(Bus_Details bus) throws Administrator_Exception {
 		
@@ -98,6 +108,11 @@ public class AdministratorDAO_impl implements AdministratorDAO {
 
 		
 	}
+	
+	
+                    	/**** Conform_Booking_Ticket ****/
+	
+	
 
 	@Override
 	public Customer conform_booking_ticket(int TicketNo) throws Administrator_Exception, Customer_Exception {
@@ -111,7 +126,7 @@ public class AdministratorDAO_impl implements AdministratorDAO {
 			
 		PreparedStatement ps = conn.prepareStatement("update booking set conformation = ? where Ticketno = ?");
 		
-		ps.setBoolean(1, true);
+		ps.setString(1, "true");
 		ps.setInt(2, TicketNo);
 		
 		int x = ps.executeUpdate();
@@ -166,7 +181,7 @@ public class AdministratorDAO_impl implements AdministratorDAO {
 		
 		try(Connection conn = DButil.getConnection()){
 			
-		PreparedStatement ps = 	conn.prepareStatement("select b.busname, b.busid , b.busfrom , b.busto, b.busDeparture , b.busTotalSeat, count(bo.busid) Total_Customer  from bus_details b INNER JOIN BOOKING bo ON b.busid = bo.busid GROUP BY bo.busid");
+		PreparedStatement ps = 	conn.prepareStatement("select * from bus_details");
 			
 		     ResultSet rs =  ps.executeQuery();
 		     
@@ -179,8 +194,8 @@ public class AdministratorDAO_impl implements AdministratorDAO {
 		    	 String busfrom = rs.getString("busfrom");
 		    	 String busto = rs.getString("busto");
 		    	 String depart = rs.getString("busDeparture");
-		    	 int seat = rs.getInt("totalSeat");
-		    	 int total = rs.getInt("Total_Customer");
+		    	 int seat = rs.getInt("bustotalSeat");
+		    	 int total = rs.getInt("busremainingseat");
 		    	 
 		    	 Bus_Details bus = new Bus_Details(busname, busid, busfrom, busto, depart, seat, total);
 		    	 
@@ -199,6 +214,10 @@ public class AdministratorDAO_impl implements AdministratorDAO {
 		
 	}
 
+	
+	                        /**** View_All_Booking ****/
+	
+	
 	@Override
 	public List<Booking> viewALLBooking() throws Customer_Exception {
 		

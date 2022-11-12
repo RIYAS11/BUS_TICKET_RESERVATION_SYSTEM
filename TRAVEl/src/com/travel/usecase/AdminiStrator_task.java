@@ -16,9 +16,19 @@ public class AdminiStrator_task {
 
                   /****	ADMIN_LOGIN ****/
 	
-  public static boolean admin_login(String username , String password) {
+  public static boolean admin_login() {
 		
 		AdministratorDAO admn = new AdministratorDAO_impl();
+		
+		Scanner sc = new Scanner(System.in);
+		
+		System.out.println("Enter the username"+"\n");
+		
+		String username = sc.next();
+		
+		System.out.println("Enter the password"+"\n");
+		
+		String password = sc.next();
 		
 		boolean flag = false;
 		

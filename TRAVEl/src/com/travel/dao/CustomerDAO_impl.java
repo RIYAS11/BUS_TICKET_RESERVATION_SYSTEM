@@ -70,9 +70,9 @@ public class CustomerDAO_impl implements CustomerDAO {
 	
 
 	@Override
-	public boolean customer_login(String username, String password) throws Customer_Exception {
+	public int customer_login(String username, String password) throws Customer_Exception {
 	
-		boolean flag = false;
+		int cid = -1;
 		
 		
 		
@@ -87,7 +87,7 @@ public class CustomerDAO_impl implements CustomerDAO {
 		  
 		  if(rs.next()) {
 			
-			  flag = true;
+			 cid = rs.getInt("customerid");
 		  }
 		  else {
 			  
@@ -107,7 +107,7 @@ public class CustomerDAO_impl implements CustomerDAO {
 		
 		
 		
-		return flag;
+		return cid;
 		
 	}
 	
@@ -166,6 +166,10 @@ public class CustomerDAO_impl implements CustomerDAO {
 		
 		
 	}
+	
+	
+                     	/**** Booking ****/
+	
 
 	@Override
 	public boolean bus_booking(int Busid , int cid) throws Customer_Exception, BusException {
@@ -176,7 +180,7 @@ public class CustomerDAO_impl implements CustomerDAO {
 		
 		try(Connection conn = DButil.getConnection()){
 			
-		PreparedStatement ps =	conn.prepareStatement("select * from bus_details where busid = ?");
+		PreparedStatement ps =	conn.prepareStatement("select * from bus_details where busid = ? AND CURDATE() < DATE(busDeparture)");
 		
 		ps.setInt(1, Busid);
 		
@@ -189,7 +193,7 @@ public class CustomerDAO_impl implements CustomerDAO {
 	    	 if(TotalSeat > 0) {
 	    		 
 	    		 
-	    		PreparedStatement ps1 =  conn.prepareStatement("insert into booking values (?,?,?)");
+	    		PreparedStatement ps1 =  conn.prepareStatement("insert into booking(customerid , busid , conformation) values (?,?,?)");
 	    		 
 	    		 ps1.setInt(1, cid);
 	    		 ps1.setInt(2, Busid);
@@ -212,9 +216,8 @@ public class CustomerDAO_impl implements CustomerDAO {
 	    		 
 	    		 throw new Customer_Exception("seat not available");
 	    	 }
-	    	 
-	    	 
 	     }
+	    	 
 	     else {
 	    	 
 	    	 throw new BusException("bus not found");

@@ -12,7 +12,7 @@ public interface CustomerDAO {
 
 	public boolean create_customerAccount(Customer c) throws Customer_Exception ; 
 	
-	public boolean customer_login(String username , String password) throws Customer_Exception;
+	public int customer_login(String username , String password) throws Customer_Exception;
 	
 	public List<Bus_Details> getbusdetails(String from , String to) throws Customer_Exception;
 	

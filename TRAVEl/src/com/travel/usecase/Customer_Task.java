@@ -4,7 +4,9 @@ import java.util.List;
 import java.util.Scanner;
 
 import com.travel.dao.CustomerDAO_impl;
+import com.travel.exception.BusException;
 import com.travel.exception.Customer_Exception;
+import com.travel.model.Booking;
 import com.travel.model.Bus_Details;
 import com.travel.model.Customer;
 
@@ -57,34 +59,35 @@ public class Customer_Task {
 	/*** Login ***/
 	
 	
-	public static boolean Login() {
+	public static int Login() {
 		
 		
-		 boolean flag = false;
+		 int cid = -1;
 
 			Scanner sc = new Scanner(System.in);
 			
-			System.out.println("Enter the UserName");
+			System.out.println("Enter the UserName"+"\n");
 			
 			String username = sc.next();
 			
-			System.out.println("Enter the password");
+			System.out.println("Enter the password"+"\n");
 			
 			String password = sc.next();
+			System.out.println("\n");
 			
 			CustomerDAO_impl cus = new CustomerDAO_impl();
 			
 			try {
 				
-				flag = cus.customer_login(username, password);
+				cid = cus.customer_login(username, password);
 				
 			} catch (Customer_Exception e) {
 				// TODO Auto-generated catch block
-				flag = false;
+				
 			}
 			
 			
-			return flag;
+			return cid;
 		
 		
 	}
@@ -126,12 +129,82 @@ public class Customer_Task {
 		
 		return list;
 		
+				
+	}
+	
+	
+	    /**** BOOKING ****/
+
+	
+	public static boolean bus_booking(int busid , int cusid) {
+		
+		boolean flag = false;
 		
 		
+		CustomerDAO_impl cus = new CustomerDAO_impl();
 		
+		try {
+			 flag = cus.bus_booking(busid, cusid);
+			
+		} catch (Customer_Exception e) {
+		
+			System.out.println("seat not avqailbel");
+			
+		} catch (BusException e) {
+			
+			System.out.println("date matter");
+		
+		}
+		
+		return flag;
 		
 	}
 	
+	
+	
+	  /**** Cancel_Ticket ****/
+	
+	
+	public static boolean cancel_Ticket(int tickno ) {
+		
+		boolean flag = false;
+		
+		
+        CustomerDAO_impl cus = new CustomerDAO_impl();
+		
+		try {
+		     flag = cus.cancel_ticket(tickno);
+			
+		} catch (Customer_Exception e) {
+		
+		
+		}
+		
+		return flag;
+		
+	}
+		
+		
+		
+     /**** Get_Booking details  ****/
+	
+	public static List<Booking> booking_details(int cid) throws Customer_Exception{
+		
+		List<Booking>	list = null;
+		  
+		  CustomerDAO_impl cus = new CustomerDAO_impl();
+				
+		      try {
+					
+		    	  list =	cus.viewALLBooking(1);
+				
+			} catch (Customer_Exception e) {
+				
+				throw new Customer_Exception(e.getMessage());
+			}
+		
+		 return list;
+	}
 	
 	
 		

@@ -53,27 +53,30 @@ public class AdminiStrator_task {
 		
 		Scanner sc = new Scanner(System.in);
 		
-		System.out.println("Enter the Bus name");
+		System.out.println("Enter the Bus name"+"\n");
 		
 		String busName = sc.next();
 		
-		System.out.println("Enter the Busid");
+		System.out.println("Enter the Busid"+"\n");
 		
 		int busid = sc.nextInt();
 		
-		System.out.println("Enter the from");
+		System.out.println("Enter the Departure City"+"\n");
 		
 		String from = sc.next();
 		
-		System.out.println("Enter the To");
+		System.out.println("Enter the Arrival City"+"\n");
 		
 		String to = sc.next();
 		
-		System.out.println("Enter the DateandTime");
+		System.out.println("Enter the Date and Time"+"\n");
 		
-		String dateandTime = sc.next();
+		String dateandTime = "";
 		
-		System.out.println("Enter the total Seat");
+		dateandTime+=sc.next()+" ";
+		dateandTime+=sc.next();
+		
+		System.out.println("Enter the total Seat"+"\n");
 		
 		int n = sc.nextInt();
 		
@@ -97,25 +100,32 @@ public class AdminiStrator_task {
 	}
 
     
-                /**** Conform_Booking_Ticket  ****/
+                /**** Conform_Booking_Ticket  
+                 * @throws Customer_Exception ****/
      
      
      
-       public static boolean conform_Book_Ticket(int Ticketno) {
+       public static Customer conform_Book_Ticket() throws Customer_Exception {
+    	   Customer customer = null;
     	   
-    	   boolean flag = false;
+    	   Scanner sc = new Scanner(System.in);
+    	   
+    	   System.out.println("Enter the TicketNo:"+"\n");
+    	   
+    	   int Ticketno = sc.nextInt();
     	   
     	   AdministratorDAO_impl admin = new AdministratorDAO_impl();
     	   
     	  try {
-			Customer customer = admin.conform_booking_ticket(Ticketno);
+		 customer = admin.conform_booking_ticket(Ticketno);
 			
-			System.out.println(customer);
+			
 			
 			
 		} catch (Administrator_Exception | Customer_Exception e) {
 			// TODO Auto-generated catch block
-			flag = false;
+			
+			throw new Customer_Exception("no data found");
 		}
     	   
     	   
@@ -123,36 +133,38 @@ public class AdminiStrator_task {
     	   
     	   
     	   
-    	   return flag;
+    	   return customer;
     	   
     	   
        }
 
        
        
-                /**** View_All_bus_details ****/
+                /**** View_All_bus_details 
+                 * @throws Administrator_Exception ****/
 
        
-       public static  boolean view_All_Bus(){
+       public static   List<Bus_Details> view_All_Bus() throws Administrator_Exception{
     	   
-    	   boolean flag = false;
+    	   List<Bus_Details> list = null;
     	   
     	   AdministratorDAO_impl admin = new  AdministratorDAO_impl();
     	   
     	   try {
-    		   List<Bus_Details> list = admin.view_all_bus_details();
+    	     list = admin.view_all_bus_details();
 			
-			System.out.println(list);
 			
-		} catch (Administrator_Exception e) {
-			flag = false;
+			
+		} catch (Exception e) {
+
+                   throw new Administrator_Exception("no bus details found");
 			
 			}
     	   
     	   
     	   
     	   
-    	   return flag;
+    	   return list;
     	   
        }
        
@@ -161,23 +173,23 @@ public class AdminiStrator_task {
        /*** View_All_Booking ****/
        
        
-       public static boolean view_all_booking() {
-    	   
-    	   boolean flag = false;
+       public static List<Booking> view_all_booking() throws Customer_Exception{
     	   
     	   List<Booking> list = null;
+    	   
+    	    list = null;
     	   
     	   AdministratorDAO_impl admin = new  AdministratorDAO_impl();
     	   
     	   try {
 			list = admin.viewALLBooking();
-			System.out.println(list);
-			flag = true;
+			
 		} catch ( Customer_Exception e) {
-			flag = false;
+			
+			throw new Customer_Exception("no booking");
 		}
     	   
-    	   return flag;
+    	   return list;
     	   
        }
        

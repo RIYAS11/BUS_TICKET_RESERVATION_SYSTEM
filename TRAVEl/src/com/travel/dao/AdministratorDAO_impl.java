@@ -181,7 +181,7 @@ public class AdministratorDAO_impl implements AdministratorDAO {
 		
 		try(Connection conn = DButil.getConnection()){
 			
-		PreparedStatement ps = 	conn.prepareStatement("select b.busname, b.busid , b.busfrom , b.busto, b.busDeparture , b.busTotalSeat, count(bo.busid) Total_Customer  from bus_details b INNER JOIN BOOKING bo ON b.busid = bo.busid GROUP BY bo.busid");
+		PreparedStatement ps = 	conn.prepareStatement("select * from bus_details");
 			
 		     ResultSet rs =  ps.executeQuery();
 		     
@@ -194,8 +194,8 @@ public class AdministratorDAO_impl implements AdministratorDAO {
 		    	 String busfrom = rs.getString("busfrom");
 		    	 String busto = rs.getString("busto");
 		    	 String depart = rs.getString("busDeparture");
-		    	 int seat = rs.getInt("totalSeat");
-		    	 int total = rs.getInt("Total_Customer");
+		    	 int seat = rs.getInt("bustotalSeat");
+		    	 int total = rs.getInt("busremainingseat");
 		    	 
 		    	 Bus_Details bus = new Bus_Details(busname, busid, busfrom, busto, depart, seat, total);
 		    	 

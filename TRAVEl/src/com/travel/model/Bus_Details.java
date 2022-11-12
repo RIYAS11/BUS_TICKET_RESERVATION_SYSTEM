@@ -16,6 +16,21 @@ public class Bus_Details {
 	
 	private int RemainingSeat;
 
+	
+	
+	
+	@Override
+	public String toString() {
+		return 
+			
+				 "BusId : "+Bid+"\n"
+				+"DepartureCity : "+BFrom+"\n"
+				+"ArrivalCity :"+BTo+"\n"
+				+"ToatalSeat : "+TotalSeat+"\n"
+				+"RemainingSeat :"+RemainingSeat+"\n\n";
+	}
+
+	
 	public Bus_Details(String bName, int bid, String bFrom, String bTo, String bDeparture, int totalSeat, int remainingSeat) {
 		super();
 		BName = bName;
@@ -37,11 +52,6 @@ public class Bus_Details {
 		TotalSeat = totalSeat;
 	}
 
-	@Override
-	public String toString() {
-		return "Bus_Details [BName=" + BName + ", Bid=" + Bid + ", BFrom=" + BFrom + ", BTo=" + BTo + ", BDeparture="
-				+ BDeparture + ", TotalSeat=" + TotalSeat + ", RemainingSeat=" + RemainingSeat + "]";
-	}
 
 	public String getBName() {
 		return BName;

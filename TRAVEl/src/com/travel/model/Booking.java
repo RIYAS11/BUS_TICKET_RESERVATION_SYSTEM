@@ -9,6 +9,18 @@ public class Booking {
 	private String conform;
 	
 	private int ticketno;
+	
+	
+	
+	
+	@Override
+	public String toString() {
+		return 
+				"CustomerId :"+cid+"\n"
+			   +"BusId :"+bid+"\n"
+			   +"Conformation : "+conform+"\n"
+			   +"TicketNo :"+ticketno+"\n";
+	}
 
 	public Booking(int cid, int bid, String conform, int ticketno) {
 		super();

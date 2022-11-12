@@ -13,8 +13,13 @@ public class Customer {
 
 	@Override
 	public String toString() {
-		return "Customer [cnmae=" + cnmae + ", Address=" + Address + ", Cmobile=" + Cmobile + ", password=" + password
-				+ "]";
+		
+		return
+		
+				"Customer Details:"+"\n\n"
+				+"Customer Name : "+cnmae+"\n"
+				+"Customer Address : "+Address+"\n"
+				+"Customer Mobile : "+Cmobile+"\n";
 	}
 
 	public String getCnmae() {

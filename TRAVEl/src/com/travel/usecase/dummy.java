@@ -17,17 +17,39 @@ public class dummy {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-         
-		CustomerDAO_impl cus = new CustomerDAO_impl();
+Scanner sc = new Scanner(System.in);
 		
-      try {
-		List<Booking>	list =	cus.viewALLBooking(1);
-		System.out.println(list);
-	} catch (Customer_Exception e) {
-		
-	}
-		
-		
+//Scanner sc = new Scanner(System.in);
+
+System.out.println("Enter the Bus name"+"\n");
+
+String busName = sc.next();
+
+System.out.println("Enter the Busid"+"\n");
+
+int busid = sc.nextInt();
+
+System.out.println("Enter the Departure City"+"\n");
+
+String from = sc.next();
+
+System.out.println("Enter the Arrival City"+"\n");
+
+String to = sc.next();
+
+System.out.println("Enter the total Seat"+"\n");
+
+int n = sc.nextInt();
+
+System.out.println("Enter the Date and Time");
+
+String dateandTime= "";
+dateandTime+=sc.next()+" ";
+dateandTime+=sc.next();
+System.out.println(dateandTime);
+//System.out.println(dateandTime);
+
+System.out.println("lop");
      		
 		
 	}

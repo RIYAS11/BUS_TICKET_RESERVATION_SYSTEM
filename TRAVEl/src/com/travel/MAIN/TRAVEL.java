@@ -15,8 +15,8 @@ import com.travel.usecase.Customer_Task;
 public class TRAVEL {
 
 	public static void main(String[] args) {
-		
-		System.out.println("   Welcome to TRAVEL Bus Booking  "+"\n");
+		System.out.println("\n\n");
+		System.out.println(ANSI_Yellow+"   Welcome to TRAVEL Bus Booking  "+"\n"+ANSI_RESET);
 		
 		Scanner sc = new Scanner(System.in);
 		
@@ -31,7 +31,7 @@ public class TRAVEL {
 		
 		else if(out == 2) Administrator_credential();
 		
-		else System.out.println("incorrect input...!");
+		else System.out.println(ANSI_RED+"incorrect input...!"+ANSI_RESET);
 		
 		
 
@@ -58,9 +58,9 @@ public class TRAVEL {
 			  
 			 boolean flag =  Customer_Task.Create_Account();
 			 
-			 if(flag) System.out.println("Account created successfully"+"\n");
+			 if(flag) System.out.println(ANSI_Green+"Account created successfully"+"\n"+ANSI_RESET);
 			 
-			 else System.out.println("Cannot create account...!"+"\n");
+			 else System.out.println(ANSI_RED+"Cannot create account...!"+"\n"+ANSI_RESET);
 			  
 			 System.out.println("1. BACK");
 			 
@@ -76,14 +76,14 @@ public class TRAVEL {
 			  
 			  if(cid > 0) {
 				  
-				  System.out.println("Logn Succesfull"+"\n");
+				  System.out.println(ANSI_Green+"Logn Succesfull"+"\n"+ANSI_RESET);
 				  
 				  Customer_Task(cid);
 			  }
 			  
 			  else {
 				  
-				  System.out.println("incorrect username or password"+"\n");
+				  System.out.println(ANSI_RED+"incorrect username or password"+"\n"+ANSI_RESET);
 				  
 				  System.out.println("1. BACK");
 					 
@@ -94,7 +94,7 @@ public class TRAVEL {
 			 
 			break;
 			  
-			default:System.out.println("incorrect input ...!");  
+			default:System.out.println(ANSI_Green+"incorrect input ...!"+ANSI_RESET);  
 			  break;
     		  
 		  }
@@ -114,13 +114,13 @@ public class TRAVEL {
 		  
 		  if(flag) {
 			  
-			  System.out.println("Login Succesfull"+"\n");
+			  System.out.println(ANSI_Green+"Login Succesfull"+"\n"+ANSI_RESET);
 			  
 			  Administrator_Task();
 		  }
 		  else {
 			  
-              System.out.println("incorrect username or password"+"\n");
+              System.out.println(ANSI_RED+"incorrect username or password"+"\n"+ANSI_RESET);
 			  
 			  System.out.println("1. BACK");
 				 
@@ -164,7 +164,7 @@ public class TRAVEL {
 			      if(flag) {
 			    	  
 			    	  
-			    	  System.out.println("Bus Details Entered Sucessfully"+"\n");
+			    	  System.out.println(ANSI_Green+"Bus Details Entered Sucessfully"+"\n"+ANSI_RESET);
 
 			    	  System.out.println("1. BACK"+"\n");
 			    	  
@@ -175,7 +175,7 @@ public class TRAVEL {
 			      }
 			      else {
 			    	  
-			    	  System.out.println("Cannot Insert Bus Details"+"\n");
+			    	  System.out.println(ANSI_RED+"Cannot Insert Bus Details"+"\n"+ANSI_RESET);
 
 			    	  System.out.println("1. BACK"+"\n");
 			    	  
@@ -191,7 +191,7 @@ public class TRAVEL {
 			try {
 				Customer customer =   AdminiStrator_task.conform_Book_Ticket();
 				
-				System.out.println("Ticket Conformed Sucessfully"+"\n");
+				System.out.println(ANSI_Green+"Ticket Conformed Sucessfully"+"\n"+ANSI_RESET);
 				
 				System.out.println(customer);
 				
@@ -203,7 +203,7 @@ public class TRAVEL {
 				
 			} catch (Customer_Exception e) {
 			
-				System.out.println("Ticket Number is invalid"+"\n");
+				System.out.println(ANSI_RED+"Ticket Number is invalid"+"\n"+ANSI_RESET);
 				
 				 System.out.println("1. BACK"+"\n");
 		    	  
@@ -221,7 +221,7 @@ public class TRAVEL {
 			  try {
 				List<Bus_Details> list = AdminiStrator_task.view_All_Bus();
 			
-				System.out.println("Bus Details :"+"\n\n");
+				System.out.println(ANSI_Green+"Bus Details :"+"\n\n"+ANSI_RESET);
 
                   for(int i = 1; i <=list.size(); i++ ) {
 					
@@ -237,7 +237,7 @@ public class TRAVEL {
 		        
 			} catch (Administrator_Exception e) {
  
-				System.out.println("No bus available"+"\n");
+				System.out.println(ANSI_RED+"No bus available"+"\n"+ANSI_RESET);
 				
 				 System.out.println("1. BACK"+"\n");
 		    	  
@@ -254,7 +254,7 @@ public class TRAVEL {
 			  try {
 					List<Booking> list = AdminiStrator_task.view_all_booking();
 				
-					System.out.println("Booking Details :"+"\n\n");
+					System.out.println(ANSI_Green+"Booking Details :"+"\n\n"+ANSI_RESET);
 					
 					for(int i = 1; i <=list.size(); i++ ) {
 							
@@ -270,7 +270,7 @@ public class TRAVEL {
 			        
 				} catch (Customer_Exception e) {
 	 
-					System.out.println("No Booking ...!"+"\n");
+					System.out.println(ANSI_RED+"No Booking ...!"+"\n"+ANSI_RESET);
 					
 					 System.out.println("1. BACK"+"\n");
 			    	  
@@ -286,7 +286,7 @@ public class TRAVEL {
 		  default : 
 			  
 			  
-			  System.out.println("unexpected input...!"+"\n");
+			  System.out.println(ANSI_RED+"unexpected input...!"+"\n"+ANSI_RESET);
 				
 				 System.out.println("1. BACK"+"\n");
 		    	  
@@ -339,7 +339,7 @@ public class TRAVEL {
 				 
 				 list =  Customer_Task.list_of_Bus();
 				 
-				System.out.println("Bus Details"+"\n");
+				System.out.println(ANSI_Green+"Bus Details"+"\n"+ANSI_RESET);
 				
 				for(int i = 1; i <=list.size(); i++ ) {
 					
@@ -350,7 +350,7 @@ public class TRAVEL {
 				
 			 catch(Customer_Exception e) {
                    
-	             System.out.println("There is no Bus Found ..!");			 
+	             System.out.println(ANSI_RED+"There is no Bus Found ..!"+ANSI_RESET);			 
 				
 	             System.out.println("1. BACK"+"\n");
 		    	  
@@ -359,7 +359,7 @@ public class TRAVEL {
 		    	  if(back ==1) Customer_Task(cid);	
 		    	  else {
 		    		  
-		    		  System.out.println("unexpected input...!"+"\n");
+		    		  System.out.println(ANSI_RED+"unexpected input...!"+"\n"+ANSI_RESET);
 						
 						 System.out.println("1. BACK"+"\n");
 				    	  
@@ -378,7 +378,7 @@ public class TRAVEL {
 				
 				if(ch >list.size() || ch < 1) {
 					
-					System.out.println("unexpected input...!"+"\n");
+					System.out.println(ANSI_RED+"unexpected input...!"+"\n"+ANSI_RESET);
 					
 					 System.out.println("1. BACK"+"\n");
 			    	  
@@ -393,15 +393,15 @@ public class TRAVEL {
 					
 					boolean flag  = Customer_Task.bus_booking(list.get(ch-1).getBid(), cid);
 					
-					if(flag) System.out.println("Booking Successfull"+"\n");
+					if(flag) System.out.println(ANSI_Green+"Booking Successfull"+"\n"+ANSI_RESET);
 					
 				} catch (BusException e) {
 					
-					System.out.println("You Can Book bus only day Before ...!"+"\n");
+					System.out.println(ANSI_RED+"You Can Book bus only day Before ...!"+"\n"+ANSI_RESET);
 				}
 				catch(Customer_Exception e) {
 					
-					System.out.println("No Available Seat ..!"+"\n");
+					System.out.println(ANSI_RED+"No Available Seat ..!"+"\n"+ANSI_RESET);
 				}
 					
 				}
@@ -420,7 +420,7 @@ public class TRAVEL {
       			boolean flag =   Customer_Task.cancel_Ticket(cid);
       			
       			if(flag) {
-      				System.out.println("Booking Canceled "+"\n");
+      				System.out.println(ANSI_Green+"Booking Canceled "+"\n"+ANSI_RESET);
 					
 					 System.out.println("1. BACK"+"\n");
 			    	  
@@ -430,7 +430,7 @@ public class TRAVEL {
       			}
       			else {
       				
-      				System.out.println(" Ticket Number not found ..!"+"\n");
+      				System.out.println(ANSI_RED+" Ticket Number not found ..!"+"\n"+ANSI_RESET);
 					
 					 System.out.println("1. BACK"+"\n");
 			    	  
@@ -449,6 +449,7 @@ public class TRAVEL {
 				
 				List<Booking> lis =  Customer_Task.booking_details(cid);
 				
+				System.out.println(ANSI_Green+"Booking Detail"+"\n"+ANSI_RESET);
 				for( int i=1; i<lis.size(); i++) {
 					
 					
@@ -464,7 +465,7 @@ public class TRAVEL {
 				
 			} catch (Customer_Exception e) {
 				
-			     System.out.println("NO Booking ..!");
+			     System.out.println(ANSI_RED+"NO Booking ..!"+ANSI_RESET);
 			     
 			     System.out.println("1. BACK"+"\n");
 		    	  
@@ -478,7 +479,7 @@ public class TRAVEL {
 		    
 		    default :  
 		    	
-		    	System.out.println("unexpected input...!"+"\n");
+		    	System.out.println(ANSI_RED+"unexpected input...!"+"\n"+ANSI_RESET);
 				
 				 System.out.println("1. BACK"+"\n");
 		    	  
@@ -493,6 +494,16 @@ public class TRAVEL {
 	  }
 	
 	
+	 /**** Declaring ANSI_RESET so that we can reset the color ****/
+	  
+	  public static final String ANSI_RESET= "\u001B[0m";
+	  
+	  public static final String ANSI_RED = "\u001B[31m";
+	  
+	  public static final String ANSI_Green = "\u001B[32m";
+	  
+	  public static final String ANSI_Yellow = "\u001B[33m";
+
 	
 
 }

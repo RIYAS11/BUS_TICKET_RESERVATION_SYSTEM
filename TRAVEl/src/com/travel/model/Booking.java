@@ -19,7 +19,7 @@ public class Booking {
 				"CustomerId :"+cid+"\n"
 			   +"BusId :"+bid+"\n"
 			   +"Conformation : "+conform+"\n"
-			   +"TicketNo :"+ticketno+"\n";
+			   +"TicketNo :"+ticketno+"\n\n";
 	}
 
 	public Booking(int cid, int bid, String conform, int ticketno) {

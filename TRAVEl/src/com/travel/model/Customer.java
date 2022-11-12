@@ -19,7 +19,7 @@ public class Customer {
 				"Customer Details:"+"\n\n"
 				+"Customer Name : "+cnmae+"\n"
 				+"Customer Address : "+Address+"\n"
-				+"Customer Mobile : "+Cmobile+"\n";
+				+"Customer Mobile : "+Cmobile+"\n\n";
 	}
 
 	public String getCnmae() {

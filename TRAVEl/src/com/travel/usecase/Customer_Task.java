@@ -133,10 +133,11 @@ public class Customer_Task {
 	}
 	
 	
-	    /**** BOOKING ****/
+	    /**** BOOKING 
+	     * @throws Customer_Exception ****/
 
 	
-	public static boolean bus_booking(int busid , int cusid) {
+	public static boolean bus_booking(int busid , int cusid) throws Customer_Exception , BusException {
 		
 		boolean flag = false;
 		
@@ -148,11 +149,11 @@ public class Customer_Task {
 			
 		} catch (Customer_Exception e) {
 		
-			System.out.println("seat not avqailbel");
+			throw new Customer_Exception(" no available seat");
 			
 		} catch (BusException e) {
 			
-			System.out.println("date matter");
+			throw new BusException("date");
 		
 		}
 		
@@ -165,15 +166,19 @@ public class Customer_Task {
 	  /**** Cancel_Ticket ****/
 	
 	
-	public static boolean cancel_Ticket(int tickno ) {
+	public static boolean cancel_Ticket(int cusid ) {
 		
 		boolean flag = false;
 		
+		Scanner sc = new Scanner(System.in);
 		
+		System.out.println("Enter the Ticket Number");
+		
+		int tickno = sc.nextInt();
         CustomerDAO_impl cus = new CustomerDAO_impl();
 		
 		try {
-		     flag = cus.cancel_ticket(tickno);
+		     flag = cus.cancel_ticket(tickno,cusid);
 			
 		} catch (Customer_Exception e) {
 		
@@ -196,7 +201,7 @@ public class Customer_Task {
 				
 		      try {
 					
-		    	  list =	cus.viewALLBooking(1);
+		    	  list =	cus.viewALLBooking(cid);
 				
 			} catch (Customer_Exception e) {
 				

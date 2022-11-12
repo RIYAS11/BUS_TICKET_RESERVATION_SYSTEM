@@ -126,7 +126,7 @@ public class AdministratorDAO_impl implements AdministratorDAO {
 			
 		PreparedStatement ps = conn.prepareStatement("update booking set conformation = ? where Ticketno = ?");
 		
-		ps.setBoolean(1, true);
+		ps.setString(1, "true");
 		ps.setInt(2, TicketNo);
 		
 		int x = ps.executeUpdate();

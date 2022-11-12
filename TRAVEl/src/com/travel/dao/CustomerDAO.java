@@ -19,7 +19,7 @@ public interface CustomerDAO {
 	
 	public boolean bus_booking(int id,int cid) throws Customer_Exception, BusException;
 	
-	public boolean cancel_ticket(int ticketno) throws Customer_Exception;
+	public boolean cancel_ticket(int ticketno, int cid) throws Customer_Exception;
 	
 	public List<Booking> viewALLBooking(int cid) throws Customer_Exception;
 	

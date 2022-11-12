@@ -22,10 +22,11 @@ public class Bus_Details {
 	@Override
 	public String toString() {
 		return 
-			
-				 "BusId : "+Bid+"\n"
+			     "BusName :"+BName+"\n"
+				+"BusId : "+Bid+"\n"
 				+"DepartureCity : "+BFrom+"\n"
 				+"ArrivalCity :"+BTo+"\n"
+				+"Bus Date And Time"+BDeparture+"\n"
 				+"ToatalSeat : "+TotalSeat+"\n"
 				+"RemainingSeat :"+RemainingSeat+"\n\n";
 	}

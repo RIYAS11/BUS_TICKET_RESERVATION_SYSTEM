@@ -203,13 +203,15 @@ public class CustomerDAO_impl implements CustomerDAO {
 	    		 
 	    		 if(x > 0) flag = true;
 	    		 
-	    		 
 	    	PreparedStatement ps2 =	conn.prepareStatement("update bus_details set BusremainingSeat = ? where busid = ?");
 	    		
-	           TotalSeat = TotalSeat--;
+	           TotalSeat = TotalSeat-1;
 	           
 	           ps2.setInt(1, TotalSeat);
 	           ps2.setInt(2, Busid);
+	         
+	           ps2.executeUpdate();
+	      	
 	    		 
 	    	 }
 	    	 else {
@@ -235,16 +237,20 @@ public class CustomerDAO_impl implements CustomerDAO {
 		
 	}
 
+	                /**** Cancel Book Ticket ****/
+	
+	
 	@Override
-	public boolean cancel_ticket(int ticketno) throws Customer_Exception {
+	public boolean cancel_ticket(int ticketno, int cid) throws Customer_Exception {
 		
 		boolean flag = false;
 		
 		try(Connection conn = DButil.getConnection()){
 			
-     PreparedStatement ps = conn.prepareStatement("delete from booking where TicketNo = ?");
+     PreparedStatement ps = conn.prepareStatement("delete from booking where TicketNo = ? AND Customerid = ?");
 			
      ps.setInt(1, ticketno);
+     ps.setInt(2 , cid);
      
     int x =  ps.executeUpdate();
     

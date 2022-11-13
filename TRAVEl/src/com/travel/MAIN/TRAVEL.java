@@ -15,14 +15,21 @@ import com.travel.usecase.Customer_Task;
 public class TRAVEL {
 
 	public static void main(String[] args) {
+		
+		MAIN();
+        
+	}
+	
+	public static void MAIN() {
+		
 		System.out.println("\n\n");
 		System.out.println(ANSI_Yellow+"   Welcome to TRAVEL Bus Booking  "+"\n"+ANSI_RESET);
-		
+		System.out.println("****************************************"+"\n");
 		Scanner sc = new Scanner(System.in);
 		
 		System.out.println(
-				" 1. Continue As Customer"+"\n"
-				+" 2. Continue As Administrator"+"\n");  
+				" 1. Continue As Customer"+"\n\n"
+						+" 2. Continue As Administrator"+"\n");  
 		
 		int out = sc.nextInt();
 		
@@ -34,7 +41,6 @@ public class TRAVEL {
 		else System.out.println(ANSI_RED+"incorrect input...!"+ANSI_RESET);
 		
 		
-
 	}
 	
 	
@@ -149,6 +155,7 @@ public class TRAVEL {
 				 +"2. Conform Ticket "+"\n"
 			     +"3. View  All Bus Details"+"\n"
 				 +"4. View All Booking"+"\n"
+				 +"5. Main Menu"+"\n"
 				  );
 		  
 		  
@@ -281,7 +288,12 @@ public class TRAVEL {
 				}
 			  
 			  
-		break;	  
+		break;	
+		
+		
+		  case 5: MAIN();
+		  
+		  break;
 			      
 		  default : 
 			  
@@ -323,6 +335,7 @@ public class TRAVEL {
 				   "1. Book Bus Ticket"+"\n"
 				  +"2. Cancel Bus Ticekt"+"\n"
 				  +"3. View All Booing"+"\n"
+				  +"4. Main Menu"+"\n"
 				  );
 		  
 		  int task = sc.nextInt();
@@ -393,7 +406,7 @@ public class TRAVEL {
 					
 					boolean flag  = Customer_Task.bus_booking(list.get(ch-1).getBid(), cid);
 					
-					if(flag) System.out.println(ANSI_Green+"Booking Successfull"+"\n"+ANSI_RESET);
+					if(flag) System.out.println(ANSI_Green+"Booking Successfull Administrator Conformed Shortly"+"\n"+ANSI_RESET);
 					
 				} catch (BusException e) {
 					
@@ -476,6 +489,9 @@ public class TRAVEL {
 			  
 		    	  
 		    break;
+		    
+		  case 4: MAIN();
+		  break;
 		    
 		    default :  
 		    	

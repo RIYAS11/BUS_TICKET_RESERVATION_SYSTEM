@@ -7,4 +7,4 @@
 <h2 ">DataBase Schema / ER-Diagram</h2>
 <img src="https://user-images.githubusercontent.com/105925554/202097054-8a4b748c-c077-4783-8166-65eb0422ca36.png">
 
-<button>Ok</buuton>
+<button onclick = "https://github.com/RIYAS11/BUS_TICKET_RESERVATION_SYSTEM/edit/main/README.md">Ok</buuton>
